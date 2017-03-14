@@ -57,9 +57,14 @@ for n in N_to_plot:
 
 
 
-fig, (ax0) = plt.subplots(nrows=1, sharex=True)
+fig, (ax0, ax1) = plt.subplots(nrows=2, sharex=True)
 ax0.errorbar(x, y, yerr=yerror, fmt='-o')
 ax0.set_title('Monte Carlo Samples')
 ax0.set_xscale('log')
+
+ax1.plot(x, yerror)
+ax1.set_title('Error vs Samples')
+ax1.set_yscale('log')
+ax1.set_xscale('log')
 
 plt.show()
