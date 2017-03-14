@@ -15,10 +15,10 @@ F = 0
 def derivatives(y,t, omega_d):
 	return [y[1], -sin(y[0])-q*y[1]+F*sin(omega_d*t)]
 
-num_oscillations = 10
-t = np.linspace(0.0, num_oscillations*2*pi, sqrt(num_oscillations)*num_oscillations*2*pi)
+num_oscillations = 100
+t = np.linspace(0.0, num_oscillations*2*pi, 100*sqrt(num_oscillations)*num_oscillations*2*pi)
 
-y0 = [0.01, 0.0]
+y0 = [.01, 0.0]
 omega_d = 2/3
 y = scipy.integrate.odeint(derivatives, y0, t, args=(omega_d,))
 
