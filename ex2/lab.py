@@ -8,17 +8,17 @@ import matplotlib.pyplot as plt
 m = 1
 g = 9.81
 l = g
-q = 0.5
-f = 1.465
+q = 0.0
+f = 1.2
 
 
 def derivatives(y,t, omega_d):
 	return [y[1], -sin(y[0])-q*y[1]+f*sin(omega_d*t)]
 
-num_oscillations = 10
-t = np.linspace(0.0, num_oscillations*2*pi, 100*sqrt(num_oscillations)*num_oscillations*2*pi)
+num_oscillations = 10000
+t = np.linspace(0.0, num_oscillations*2*pi, sqrt(num_oscillations)*num_oscillations*2*pi)
 
-y0 = [0.5, 0.0]
+y0 = [0.2, 0.0]
 omega_d = 2/3
 y = scipy.integrate.odeint(derivatives, y0, t, args=(omega_d,))
 
@@ -34,10 +34,10 @@ for i in range(len(y)):
 fig, (ax0, ax1) = plt.subplots(nrows=2, sharex=False)
 
 ax0.plot(t, thetas[:,0], '-')
-ax0.set_title(str(num_oscillations) + " oscillation theta_0:" + str(round(y0[0],2)) + " omega_0: " + str(y0[1]) + " (q,f) : " + str((q,f)))
+ax0.set_title(str(num_oscillations) + " oscillation theta_0:" + str(round(y0[0],5)) + " omega_0: " + str(y0[1]) + " (q,f) : " + str((q,f)))
 
 ax1.plot(t, thetas[:,1], '-')
 ax1.set_title('Angular velocityvs time')
 
-plt.savefig(str(num_oscillations) + "oscillation"+"theta_0:" + str(round(y0[0],2)) + "omega_0: "+ str(y0[1]) + " (q,f) : " + str((q,f))+'.png' )
+plt.savefig(str(num_oscillations) + "oscillation"+"theta_0:" + str(round(y0[0],5)) + "omega_0: "+ str(y0[1]) + " (q,f) : " + str((q,f))+'.png' )
 plt.show()
