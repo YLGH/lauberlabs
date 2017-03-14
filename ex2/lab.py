@@ -15,10 +15,10 @@ F = 0
 def derivatives(y,t, omega_d):
 	return [y[1], -sin(y[0])-q*y[1]+F*sin(omega_d*t)]
 
-num_oscillations = 100
+num_oscillations = 10
 t = np.linspace(0.0, num_oscillations*2*pi, 100*sqrt(num_oscillations)*num_oscillations*2*pi)
 
-y0 = [.01, 0.0]
+y0 = [pi/2, 0.0]
 omega_d = 2/3
 y = scipy.integrate.odeint(derivatives, y0, t, args=(omega_d,))
 
@@ -39,4 +39,5 @@ ax0.set_title(str(num_oscillations) + " oscillation + theta_0:" + str(round(y0[0
 ax1.plot(t, energy, '-')
 ax1.set_title('Energy vs time')
 
+plt.savefig(str(num_oscillations) + "oscillation"+"theta_0:" + str(round(y0[0],2)) + "omega_0: " +str(y0[1])+'.png')
 plt.show()
