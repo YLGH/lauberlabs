@@ -17,8 +17,6 @@ vecsin = np.vectorize(sin_cornell)
 
 us = np.random.uniform(-pi,pi, 1000)
 
-veccos(us)
-vecsin(us)
 
 plt.scatter(veccos(us), vecsin(us), s = 1)
 plt.show()
