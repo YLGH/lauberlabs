@@ -62,7 +62,7 @@ ax0.errorbar(x, y, yerr=yerror, fmt='-o')
 ax0.set_title('Monte Carlo Samples')
 ax0.set_xscale('log')
 
-ax1.plot(x, yerror)
+ax1.scatter(x, yerror)
 ax1.set_title('Error vs Samples')
 ax1.set_yscale('log')
 ax1.set_xscale('log')
