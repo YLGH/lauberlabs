@@ -18,7 +18,7 @@ def derivatives(y,t, omega_d):
 num_oscillations = 10
 t = np.linspace(0.0, num_oscillations*2*pi, 100*sqrt(num_oscillations)*num_oscillations*2*pi)
 
-y0 = [pi/2, 0.0]
+y0 = [pi/2+pi/2-.001, 0.0]
 omega_d = 2/3
 y = scipy.integrate.odeint(derivatives, y0, t, args=(omega_d,))
 
