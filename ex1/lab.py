@@ -73,7 +73,7 @@ fig, (ax2) = plt.subplots(nrows=1, sharex=False)
 # ax1.set_yscale('log')
 # ax1.set_xscale('log')
 
-ax2.plot(x, error_ratio)
+ax2.scatter(x, error_ratio)
 ax2.set_title('Error ratio (rms/sigma) vs x')
 ax2.set_yscale('log')
 ax2.set_xscale('log')
