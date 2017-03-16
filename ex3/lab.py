@@ -30,7 +30,7 @@ class CoilElement:
 		self.current = current
 	def dB(self, point):
 		r = Vector(point.coordinates - self.start.coordinates)
-		return current*mu_0/(4*pi)*self.direction.cross(r)/(r.magnitude()**3.0)
+		return self.current*mu_0/(4*pi)*self.direction.cross(r)/(r.magnitude()**3.0)
 	def __str__(self):
 		return str((str(self.start), str(self.direction)))
 
@@ -60,10 +60,9 @@ class Coil:
 		return str(foo)
 
 current = 1.0/mu_0
-
-#Core task 1 and task 2
-coil1 = Coil(-0.5, current, r, 4000)
-coil2 = Coil(0.5, current, r, 4000)
+#Core task 1 and task 2 and sup 1, just change values of current
+coil1 = Coil(0.5, current, r, 4000)
+coil2 = Coil(0.5, -current, r, 4000)
 
 
 #plotting x 
@@ -98,30 +97,38 @@ coil2 = Coil(0.5, current, r, 4000)
 # plt.show()
 
 
+#supplementary task 2
+N = 2
+xpoints = np.linspace(-10*r, 10*r, N)
+coils = map(lambda g: Coil(g, current, r, 4000), xpoints)
+def sum(coils, point):
+	b_field = np.array((0.0,0.0,0.0))
+	for c in coils:
+		b_field += c.fieldAt(point).direction
+	return (b_field[0], b_field[1], b_field[2], Vector(b_field).magnitude())
 
 
-import csv 
-f = open('image4.csv', 'w')
-write_points = []
-# f = open('image.dat', 'w')
-xs = np.linspace(-0.05, 0.05, 10)
-ys = np.linspace(-0.05, 0.05, 10)
 
-writer = csv.writer(f, delimiter = '\t')
+# import csv 
+# f = open('reversecoil.csv', 'w')
+# write_points = []
+# xs = np.linspace(-0.05, 0.05, 11)
+# ys = np.linspace(-0.05, 0.05, 11)
 
-for y in ys:
-	write_points = []
-	for x in xs:
-		b_vector = coil1.fieldAt(Point(np.array((x,y, 0.0)))).direction 
-		b_vector2 = coil2.fieldAt(Point(np.array((x,y,0.0)))).direction
+# writer = csv.writer(f, delimiter = '\t')
 
-		b_field = b_vector + b_vector2
-		bx = b_field[0]
-		by = b_field[1]
-		bz = b_field[2]
-		bmag = Vector(b_field).magnitude()
-		write_points.append((x,y,bx,by,bz,bmag))
-	writer.writerows(write_points)
-	writer.writerow([])
+# for y in ys:
+# 	write_points = []
+# 	for x in xs:
+# 		b_vector = coil1.fieldAt(Point(np.array((x,y, 0.0)))).direction 
+# 		b_vector2 = coil2.fieldAt(Point(np.array((x,y,0.0)))).direction
 
+# 		b_field = b_vector + b_vector2
+# 		bx = b_field[0]
+# 		by = b_field[1]
+# 		bz = b_field[2]
+# 		bmag = Vector(b_field).magnitude()
+# 		write_points.append((x,y,bx,by,bz,bmag))
+# 	writer.writerows(write_points)
+# 	writer.writerow([])
 
