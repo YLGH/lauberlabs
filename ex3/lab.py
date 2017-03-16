@@ -58,9 +58,15 @@ class Coil:
 		for x in self.coilElements:
 			foo.append(str(x))
 		return str(foo)
-current = 1.0/mu_0
-coil = Coil(0, current, r, 4000)
 
+current = 1.0/mu_0
+
+#Core task 1 and task 2
+coil1 = Coil(-0.5, current, r, 4000)
+coil2 = Coil(0.5, current, r, 4000)
+
+
+#plotting x 
 
 # xs = np.linspace(-10, 10, 11)
 # ys = np.linspace(-10, 10, 11)
@@ -95,26 +101,27 @@ coil = Coil(0, current, r, 4000)
 
 
 import csv 
-f = open('image3.csv', 'w')
+f = open('image4.csv', 'w')
 write_points = []
 # f = open('image.dat', 'w')
-xs = np.linspace(-2, 2, 30)
-ys = np.linspace(-2, 2, 30)
+xs = np.linspace(-0.05, 0.05, 10)
+ys = np.linspace(-0.05, 0.05, 10)
 
 writer = csv.writer(f, delimiter = '\t')
 
 for y in ys:
 	write_points = []
 	for x in xs:
+		b_vector = coil1.fieldAt(Point(np.array((x,y, 0.0)))).direction 
+		b_vector2 = coil2.fieldAt(Point(np.array((x,y,0.0)))).direction
 
-		b_vector = coil.fieldAt(Point(np.array((x, y, 0.0))))
-		bx = b_vector.direction[0]
-		by = b_vector.direction[1]
-		bz = b_vector.direction[2]
-		bmag = b_vector.magnitude()
+		b_field = b_vector + b_vector2
+		bx = b_field[0]
+		by = b_field[1]
+		bz = b_field[2]
+		bmag = Vector(b_field).magnitude()
 		write_points.append((x,y,bx,by,bz,bmag))
 	writer.writerows(write_points)
 	writer.writerow([])
 
 
-# np.readtxt('image.dat')
