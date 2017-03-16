@@ -59,8 +59,6 @@ for n in N_to_plot:
     y.append(mean)
     yerror.append(error)
 
-
-
 # fig, (ax0, ax1, ax2) = plt.subplots(nrows=3, sharex=False)
 
 fig, (ax2) = plt.subplots(nrows=1, sharex=False)
@@ -77,7 +75,6 @@ ax2.scatter(x, error_ratio)
 ax2.set_title('Error ratio (rms/sigma) vs x')
 ax2.set_yscale('log')
 ax2.set_xscale('log')
-
 
 
 plt.show()
