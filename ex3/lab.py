@@ -98,19 +98,33 @@ coil2 = Coil(0.5, -current, r, 4000)
 
 
 #supplementary task 2
-N = 2
-xpoints = np.linspace(-10*r, 10*r, N)
-coils = map(lambda g: Coil(g, current, r, 4000), xpoints)
-def sum(coils, point):
-	b_field = np.array((0.0,0.0,0.0))
-	for c in coils:
-		b_field += c.fieldAt(point).direction
-	return (b_field[0], b_field[1], b_field[2], Vector(b_field).magnitude())
 
 
+# def solenoid_center(n):
+# 	xpoints = np.linspace(-10*r, 10*r, n)
+# 	coils = map(lambda g: Coil(g, current, r, 4000), xpoints)
+# 	def sum(coils, point):
+# 		b_field = np.array((0.0,0.0,0.0))
+# 		for c in coils:
+# 			b_field += c.fieldAt(point).direction
+# 		return (b_field[0], b_field[1], b_field[2], Vector(b_field).magnitude())
+# 	return sum(coils, Point(np.array((0.0,0.0,0.0))))[3]
+
+# N = 31
+# sole_x = np.linspace(2, N, N-1)
+# sole_y = map(lambda g: solenoid_center(g), sole_x)
+
+
+# fig, (ax0) = plt.subplots(nrows=1, sharex=True)
+# ax0.plot(helm_x, helm_y, '-')
+# ax0.set_title('Number coils vs Field strength at center')
+# ax0.set_xlabel('Coils')
+# ax0.set_ylabel('Calcualted Field Strength')
+# plt.savefig('helmholtz')
+# plt.show()
 
 # import csv 
-# f = open('reversecoil.csv', 'w')
+# f = open('helmholtz.csv', 'w')
 # write_points = []
 # xs = np.linspace(-0.05, 0.05, 11)
 # ys = np.linspace(-0.05, 0.05, 11)
