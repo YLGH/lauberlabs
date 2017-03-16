@@ -59,63 +59,62 @@ class Coil:
 			foo.append(str(x))
 		return str(foo)
 current = 1.0/mu_0
-coil = Coil(0, current, r, 2000)
+coil = Coil(0, current, r, 4000)
 
 
-xs = np.linspace(-10, 10, 201)
-ys = np.linspace(-10, 10, 201)
-magfield = map(lambda g: (coil.fieldAt(Point(np.array((g,0,0))))).magnitude(), xs)
-theoretical_magfield = map(lambda z: mu_0/(2.0)*current/(z**2+r**2)**(3/2), xs)
+# xs = np.linspace(-10, 10, 11)
+# ys = np.linspace(-10, 10, 11)
+# magfield = map(lambda g: (coil.fieldAt(Point(np.array((g,0,0))))).magnitude(), xs)
+# theoretical_magfield = map(lambda z: mu_0/(2.0)*current/(z**2+r**2)**(3/2), xs)
 
-difference = []
-for i in range(len(magfield)):
-	difference.append(theoretical_magfield[i]- magfield[i])
+# difference = []
+# for i in range(len(magfield)):
+# 	difference.append(theoretical_magfield[i]- magfield[i])
 
-fig, (ax0, ax1, ax2) = plt.subplots(nrows=3, sharex=True)
-
-
-ax0.plot(xs, magfield, '-')
-ax0.set_title('Calculated')
-ax0.set_xlabel('distance from coil')
-ax0.set_ylabel('Calcualted Field Strength')
-
-ax1.plot(xs, theoretical_magfield, '-')
-ax1.set_title('Theoretical')
-ax1.set_xlabel('distance from coil')
-ax1.set_ylabel('Calcualted Field Strength')
-
-ax2.plot(xs, difference, '-')
-ax2.set_title('Difference')
-ax2.set_xlabel('distance from coil')
-ax2.set_ylabel('Difference')
-plt.savefig('xplots')
-plt.show()
+# fig, (ax0, ax1, ax2) = plt.subplots(nrows=3, sharex=True)
 
 
+# ax0.plot(xs, magfield, '-')
+# ax0.set_title('Calculated')
+# ax0.set_xlabel('distance from coil')
+# ax0.set_ylabel('Calcualted Field Strength')
 
-# u = v = 0.5*np.ones((101,101))
+# ax1.plot(xs, theoretical_magfield, '-')
+# ax1.set_title('Theoretical')
+# ax1.set_xlabel('distance from coil')
+# ax1.set_ylabel('Calcualted Field Strength')
 
-# import csv 
-# f = open('image2.csv', 'w')
-# write_points = []
-# # f = open('image.dat', 'w')
-# xs = np.linspace(-2, 2, 101)
-# ys = np.linspace(-2, 2, 101)
+# ax2.plot(xs, difference, '-')
+# ax2.set_title('Difference')
+# ax2.set_xlabel('distance from coil')
+# ax2.set_ylabel('Difference')
+# plt.savefig('xplots')
+# plt.show()
 
-# writer = csv.writer(f, delimiter = '\t')
 
-# for y in ys:
-# 	write_points = []
-# 	for x in xs:
 
-# 		b_vector = coil.fieldAt(Point(np.array((x, y, 0.0))))
-# 		bx = b_vector.direction[0]
-# 		by = b_vector.direction[1]
-# 		bz = b_vector.direction[2]
-# 		bmag = b_vector.magnitude()
-# 		write_points.append((x,y,bx,by,bz,bmag))
-# 	writer.writerows(write_points)
-# 	writer.writerow([])
+
+import csv 
+f = open('image3.csv', 'w')
+write_points = []
+# f = open('image.dat', 'w')
+xs = np.linspace(-2, 2, 30)
+ys = np.linspace(-2, 2, 30)
+
+writer = csv.writer(f, delimiter = '\t')
+
+for y in ys:
+	write_points = []
+	for x in xs:
+
+		b_vector = coil.fieldAt(Point(np.array((x, y, 0.0))))
+		bx = b_vector.direction[0]
+		by = b_vector.direction[1]
+		bz = b_vector.direction[2]
+		bmag = b_vector.magnitude()
+		write_points.append((x,y,bx,by,bz,bmag))
+	writer.writerows(write_points)
+	writer.writerow([])
 
 
 # np.readtxt('image.dat')
